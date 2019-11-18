@@ -12,8 +12,7 @@ namespace __11._16_Plan_Your_Heist
             */
 
             // 1. Print the message "Plan Your Heist!".
-            Console.WriteLine("Plan Your Heist!");
-            Console.Write("\n");
+            Console.WriteLine("Plan Your Heist!\n");
 
             // 1-2. Create a way to store a single team member. A team member will have a name, a skill Level and a courage factor. The skill Level will be a positive integer and the courage factor will be a decimal between 0.0 and 2.0.
             Dictionary<string, string> teamMember = new Dictionary<string, string>();
@@ -34,10 +33,57 @@ namespace __11._16_Plan_Your_Heist
             Console.Write("\n");
 
             // 2-4. Display a message containing the number of members of the team
-            Console.WriteLine($"Number of team members: {teamMembers.Count}");
+            Console.WriteLine($"Number of team members: {teamMembers.Count}\n");
 
-            Console.Write("\n");
+            // 3-1. Stop displaying each team member's information
+            //showTeamInfo(teamMembers);
 
+            // 3-2. Store a value for the bank's difficulty level. Set this value to 100
+            int bankDifficultyLevel = 100;
+
+            // 3-3. Sum the skill levels of the team. Save that number
+            int teamSkillLevel = getSkillLevelSum(teamMembers);
+            Console.WriteLine($"Teams skill level sum: {teamSkillLevel}");
+
+            // 3-4. Compare the number with the bank's difficulty level. If the team's skill level is greater than or equal to the bank's difficulty level, Display a success message, otherwise display a failure message.
+            if( teamSkillLevel >= bankDifficultyLevel )
+            {
+                Console.WriteLine("Bank heist - success");
+            }
+            else
+            {
+                Console.WriteLine("Bank heist - failure");
+            }
+
+        }
+
+        static Dictionary<string, string> getTeamMember()
+        {
+            Dictionary<string, string> teamMember = new Dictionary<string, string>();
+
+            // 1-3. Prompt the user to enter a team member's name and save that name.
+            Console.Write("Enter your team member's name: ");
+            string name = Console.ReadLine();
+            teamMember.Add("Name", name);
+
+            if( teamMember["Name"] != "" )
+            {
+                // 1-4. Prompt the user to enter a team member's skill level and save that skill level with the name.
+                Console.Write("Enter your team member's skill level: ");
+                string skillLevel = Console.ReadLine();
+                teamMember.Add("Skill Level", skillLevel);
+
+                // 1-5. Prompt the user to enter a team member's courage factor and save that courage factor with the name.
+                Console.Write("Enter your team member's courage factor: ");
+                string courageFactor = Console.ReadLine();
+                teamMember.Add("Courage Factor", courageFactor);
+            }
+
+            return teamMember;
+        }
+
+        static void showTeamInfo( List<Dictionary<string, string>> teamMembers )
+        {
             // 2-5. Display each team member's information
             foreach( Dictionary<string, string> member in teamMembers )
             {
@@ -50,30 +96,17 @@ namespace __11._16_Plan_Your_Heist
             }
         }
 
-        static Dictionary<string, string> getTeamMember()
+        static int getSkillLevelSum( List<Dictionary<string, string>> teamMembers )
         {
-            Dictionary<string, string> teamMember = new Dictionary<string, string>();
-
-            // 1-3. Prompt the user to enter a team member's name and save that name.
-            Console.WriteLine("Enter your team member's name:");
-            string name = Console.ReadLine();
-            teamMember.Add("Name", name);
-
-            if( teamMember["Name"] != "" )
+            int sum = 0;
+            foreach( Dictionary<string, string> member in teamMembers )
             {
-                // 1-4. Prompt the user to enter a team member's skill level and save that skill level with the name.
-                Console.WriteLine("Enter your team member's skill level:");
-                string skillLevel = Console.ReadLine();
-                teamMember.Add("Skill Level", skillLevel);
-
-                // 1-5. Prompt the user to enter a team member's courage factor and save that courage factor with the name.
-                Console.WriteLine("Enter your team member's courage factor:");
-                string courageFactor = Console.ReadLine();
-                teamMember.Add("Courage Factor", courageFactor);
+                // 3-3. Sum the skill levels of the team
+                sum += Convert.ToInt32(member["Skill Level"]);
             }
-
-            return teamMember;
+            return sum;
         }
+
 
     }
 }
