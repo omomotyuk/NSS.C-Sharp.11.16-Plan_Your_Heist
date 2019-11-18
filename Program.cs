@@ -8,7 +8,7 @@ namespace __11._16_Plan_Your_Heist
         static void Main(string[] args)
         {
             /*
-            // Phase 1, phase 2, phase 3, phase 4, phase 5
+            // Phase 1, phase 2, phase 3, phase 4, phase 5 and phase 6
             */
 
             // 1. Print the message "Plan Your Heist!".
@@ -19,6 +19,12 @@ namespace __11._16_Plan_Your_Heist
 
             // 2-1. Create a way to store several team members
             List<Dictionary<string, string>> teamMembers = new List<Dictionary<string, string>>();
+
+            // 6-1. At the beginning of the program, prompt the user to enter the difficulty level of the bank
+            // 3-2. Store a value for the bank's difficulty level. Set this value to 100
+            Console.Write("Enter difficulty level of the bank: ");
+            int bankDifficultyLevel = Convert.ToInt32(Console.ReadLine());
+            Console.Write("\n");
 
             // 2-2. Collect several team members' information
             do{
@@ -41,14 +47,13 @@ namespace __11._16_Plan_Your_Heist
             // 3-1. Stop displaying each team member's information
             //showTeamInfo(teamMembers);
 
-            // 3-2. Store a value for the bank's difficulty level. Set this value to 100
-            int bankDifficultyLevel = 100;
-
             // 3-3. Sum the skill levels of the team. Save that number
             int teamSkillLevel = getSkillLevelSum(teamMembers);
 
             // 4-1. Create a random number between -10 and 10 for the heist's luck value
             Random heistLuckValue = new Random();
+            int success = 0;
+            int failure = 0;
 
             // 5-1. Run the scenario multiple times
             for( int i = 0; i < trialRunNumbers; i++ )
@@ -69,14 +74,19 @@ namespace __11._16_Plan_Your_Heist
                 // 3-4. Compare the number with the bank's difficulty level. If the team's skill level is greater than or equal to the bank's difficulty level, Display a success message, otherwise display a failure message.
                 if( teamSkillLevel >= currentBankDLevel )
                 {
+                    success++;
                     Console.WriteLine("Bank heist - success\n");
                 }
                 else
                 {
+                    failure++;
                     Console.WriteLine("Bank heist - failure\n");
                 }
             }
 
+            // 6-2. At the end of the program, display a report showing the number of successful runs and the number of failed runs.
+            Console.WriteLine($"Report:\nNumber of successful runs: {success}");
+            Console.WriteLine($"Number of failed runs: {failure}\n");
         }
 
         static Dictionary<string, string> getTeamMember()
