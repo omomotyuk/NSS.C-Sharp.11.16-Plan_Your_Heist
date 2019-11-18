@@ -8,7 +8,7 @@ namespace __11._16_Plan_Your_Heist
         static void Main(string[] args)
         {
             /*
-            // Phase 1, phase 2
+            // Phase 1, phase 2, phase 3
             */
 
             // 1. Print the message "Plan Your Heist!".
@@ -43,6 +43,17 @@ namespace __11._16_Plan_Your_Heist
 
             // 3-3. Sum the skill levels of the team. Save that number
             int teamSkillLevel = getSkillLevelSum(teamMembers);
+
+            // 4-1. Create a random number between -10 and 10 for the heist's luck value
+            Random heistLuckValue = new Random();
+
+            // 4-2. Add this number to the bank's difficulty level
+            bankDifficultyLevel += heistLuckValue.Next(-10,10);
+
+            // 4-3. Before displaying the success or failure message, display a report that shows
+            // 4-3. The bank's difficulty level
+            Console.WriteLine($"Bank's difficulty level: {bankDifficultyLevel}");
+            // 4-3. The team's combined skill level
             Console.WriteLine($"Teams skill level sum: {teamSkillLevel}");
 
             // 3-4. Compare the number with the bank's difficulty level. If the team's skill level is greater than or equal to the bank's difficulty level, Display a success message, otherwise display a failure message.
